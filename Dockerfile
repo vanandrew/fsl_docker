@@ -60,65 +60,7 @@ RUN apt-get install -y python3 python-is-python3 python3-setuptools && \
     sed -i 's/COMPILE_GPU = 1/COMPILE_GPU = 0/g' config/buildSettings.mk && \
     sed -i 's/-lm  -lgdc -lgd -lpng -lz/-lgdc -lgd -lpng -lm -lz/g' src/miscvis/Makefile && \
     sed -i 's/${LIBCC}/${LIBCC} -llapack -lblas/g' src/siena/Makefile
-RUN MAKEOPTIONS=-j4 ./build asl_mfree \
-                            avwutils \
-                            basil \
-                            baycest \
-                            bet2 \
-                            bianca \
-                            cluster \
-                            copain \
-                            fsl_deface \
-                            dwssfp \
-                            eddy \
-                            fabber_core \
-                            fabber_models_asl \
-                            fabber_models_cest \
-                            fabber_models_dce \
-                            fabber_models_dsc \
-                            fabber_models_dualecho \
-                            fabber_models_dwi \
-                            fabber_models_t1 \
-                            fabber_models_qbold \
-                            fast4 \
-                            fdt \
-                            feat5 \
-                            film \
-                            filmbabe \
-                            first \
-                            flameo \
-                            flirt \
-                            fnirt \
-                            fslpres \
-                            fslvbm \
-                            fugue \
-                            gps \
-                            ifit \
-                            lesions \
-                            load_dicom \
-                            load_varian \
-                            mcflirt \
-                            melodic \
-                            misc_scripts \
-                            miscvis \
-                            mm \
-                            MSM \
-                            nma \
-                            oxford_asl \
-                            possum \
-                            ptx2 \
-                            qboot \
-                            randomise \
-                            relax \
-                            sgeutils \
-                            siena \
-                            slicetimer \
-                            susan \
-                            swe \
-                            tbss \
-                            tissue \
-                            verbena \
-                            xtract
+RUN MAKEOPTIONS=-j4 ./build eddy
 # disable distclean for fast builds, after depends.mk are generated from the first build pass
 RUN sed -i 's/${MAKE} distclean ;/# ${MAKE} distclean ;/g' config/common/buildproj
 ENV FSLOUTPUTTYPE=NIFTI_GZ FSLMULTIFILEQUIT=TRUE FSLTCLSH=${FSLDIR}/bin/fsltclsh FSLWISH=${FSLDIR}/fslwish \
